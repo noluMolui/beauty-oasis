@@ -1,10 +1,10 @@
-/* Reset some default browser styles */
+
 
 html, body {
     overflow-x: hidden;
 }
 
-/* Body and overall layout */
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #1d1a1a;
@@ -12,13 +12,13 @@ body {
     line-height: 1.6;
 }
 
-/* Header styles */
+
 header {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 10000;
-    background-color: #000000; /* Light pink */
+    background-color: #000000; 
    text-align: center;}
     
    
@@ -48,13 +48,13 @@ nav a:hover {
     text-decoration: underline #da1283;
 }
 
-/* Default: Show all links */
+
 .nav-links {
     display: flex;
     gap: 20px;
 }
 
-/* Hide Dropdown Button by Default */
+
 .dropdown-btn {
     display: none;
     background: none;
@@ -64,7 +64,7 @@ nav a:hover {
     cursor: pointer;
 }
 
-/* Small Screens: Show Only Home Button */
+
 @media screen and (max-width: 768px) {
     .nav-links {
         display: none;
@@ -83,11 +83,11 @@ nav a:hover {
     }
 
     .dropdown-btn {
-        display: block; /* Show only on small screens */
+        display: block;
     }
 
     .nav-links.show {
-        display: flex; /* Show links when toggled */
+        display: flex;
     }
 }
  
@@ -99,14 +99,14 @@ h1{margin-top: 150px;
 }
 @media screen and (max-width: 768px) {
     h1 {
-        font-size: 1.5rem; /* Adjust size for mobile */
+        font-size: 1.5rem; 
     }
 }
 
-/* Even smaller screens (very small phones) */
+
 @media screen and (max-width: 480px) {
     h1 {
-        font-size: 1.2rem; /* Further reduce size for tiny screens */
+        font-size: 1.2rem;
     }
 }
 h2{margin-top: 0;}
@@ -128,7 +128,7 @@ h2, h1, p, .product h3{ text-align: center;
 
 @media (max-width: 768px) {
     .image-container img {
-        max-width: 45%; /* Adjust image size for mobile */
+        max-width: 45%; 
         height: auto;
     }
 }
