@@ -18,20 +18,25 @@
     <header>
        
         <nav>
-            
             <img src="images/logo.jpg" alt="logo image">
-                <a href="#home">Home</a> 
-               <a href="#products">Products</a>
-             <a href="#about">About</a> </nav>
-               <a href="#contact">Contact</a>
+            
+            <!-- Dropdown for small screens -->
+            <button class="dropdown-btn">Home &#9662;</button>
+            
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
                 <a href="#cart">🛒 <span id="cart-count">0</span></a>
-              
-                <div class="cart-container">
-                    <div id="cart-dropdown" class="cart-dropdown">
-                        <ul id="cart-items"></ul>
-                        </div>
+            </div>
+        
+            <div class="cart-container">
+                <div id="cart-dropdown" class="cart-dropdown">
+                    <ul id="cart-items"></ul>
                 </div>
+            </div>
         </nav>
+        
     </header>
 <br>
     <h1>beauty Oasis</h1>
