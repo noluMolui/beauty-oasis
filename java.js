@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addToCartButtons = document.querySelectorAll(".add-to-cart");
     const checkoutButton = document.getElementById("checkout");
 
-    // ✅ Add items to cart
+    
     if (addToCartButtons.length > 0) {
         addToCartButtons.forEach(button => {
             button.addEventListener("click", (event) => {
@@ -29,11 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ✅ Checkout - Send WhatsApp Message
     if (checkoutButton) {
         checkoutButton.addEventListener("click", () => {
-            let totalAmount = document.getElementById("cart-total").textContent; // Get total price
-            let phoneNumber = "27794372926"; // ✅ WhatsApp number (International format)
+            let totalAmount = document.getElementById("cart-total").textContent; 
+            let phoneNumber = "27794372926"; 
 
             if (cart.length === 0 || totalAmount === "0" || totalAmount === "") {
                 alert("Your cart is empty. Add items before checking out!");
@@ -43,11 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
             let message = `Hello, I want to place an order. My total is $${totalAmount}. Please send me your banking details.`;
             let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-            window.open(whatsappURL, "_blank"); // ✅ Open WhatsApp chat
+            window.open(whatsappURL, "_blank"); 
         });
     }
 
-    // ✅ Update Cart (Added Remove Button)
+    
     function updateCart() {
         cartItems.innerHTML = "";
         let total = 0;
@@ -58,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const li = document.createElement("li");
             li.textContent = `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
 
-            // ✅ Create Remove Button
+           
             const removeButton = document.createElement("button");
             removeButton.textContent = "Remove";
             removeButton.style.marginLeft = "10px";
@@ -69,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
             removeButton.style.cursor = "pointer";
             removeButton.style.borderRadius = "5px";
 
-            // ✅ Remove item when button is clicked
+           
             removeButton.addEventListener("click", () => {
                 removeFromCart(index);
             });
@@ -82,10 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
         cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     }
 
-    // ✅ Remove item from cart
+    
     function removeFromCart(index) {
-        cart.splice(index, 1); // ✅ Remove the item from the cart array
-        updateCart(); // ✅ Refresh the cart display
+        cart.splice(index, 1);
+        updateCart();
     }
 });
 
