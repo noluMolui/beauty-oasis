@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const paymentOptions = document.getElementById("payment-options");
     const paymentForm = document.getElementById("payment-form");
     const bankDetails = document.getElementById("bank-details");
-    const dropdownBtn = document.querySelector(".dropdown-btn");
     const navLinks = document.querySelector(".nav-links");
 
     // ✅ Fix: Ensure elements exist before adding event listeners
