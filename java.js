@@ -2,21 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const cart = [];
     const cartCount = document.getElementById("cart-count");
     const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total"); // Ensure this exists in HTML
+    const cartTotal = document.getElementById("cart-total");
     const addToCartButtons = document.querySelectorAll(".add-to-cart");
     const checkoutButton = document.getElementById("checkout");
-    const paymentOptions = document.getElementById("payment-options");
-    const paymentForm = document.getElementById("payment-form");
-    const bankDetails = document.getElementById("bank-details");
-    const navLinks = document.querySelector(".nav-links");
 
-    // ✅ Fix: Ensure elements exist before adding event listeners
+    // ✅ Add items to cart
     if (addToCartButtons.length > 0) {
         addToCartButtons.forEach(button => {
             button.addEventListener("click", (event) => {
                 const productElement = event.target.closest(".product");
 
-                if (!productElement) return; // Prevent errors if button is outside .product
+                if (!productElement) return;
 
                 const productId = productElement.dataset.id;
                 const productName = productElement.dataset.name;
@@ -33,58 +29,63 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // ✅ Checkout - Send WhatsApp Message
     if (checkoutButton) {
         checkoutButton.addEventListener("click", () => {
-            paymentOptions.style.display = "block";
+            let totalAmount = document.getElementById("cart-total").textContent; // Get total price
+            let phoneNumber = "27794372926"; // ✅ WhatsApp number (International format)
+
+            if (cart.length === 0 || totalAmount === "0" || totalAmount === "") {
+                alert("Your cart is empty. Add items before checking out!");
+                return;
+            }
+
+            let message = `Hello, I want to place an order. My total is $${totalAmount}. Please send me your banking details.`;
+            let whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappURL, "_blank"); // ✅ Open WhatsApp chat
         });
     }
 
-    if (paymentForm) {
-        paymentForm.addEventListener("change", (event) => {
-            if (event.target.name === "payment-method" && event.target.value === "bank-transfer") {
-                bankDetails.style.display = "block";
-            } else {
-                bankDetails.style.display = "none";
-            }
-        });
-
-        paymentForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const paymentMethod = paymentForm.querySelector('input[name="payment-method"]:checked').value;
-
-            if (paymentMethod === "bank-transfer") {
-                const accountNumber = document.getElementById("account-number").value;
-                const bankName = document.getElementById("bank-name").value;
-                alert(`Payment successful! Bank Transfer to ${bankName}, Account Number: ${accountNumber}`);
-            } else {
-                alert("Payment successful!");
-            }
-        });
-    }
-
-    if (dropdownBtn && navLinks) {
-        dropdownBtn.addEventListener("click", function () {
-            navLinks.classList.toggle("show");
-        });
-
-        document.addEventListener("click", function (event) {
-            if (!dropdownBtn.contains(event.target) && !navLinks.contains(event.target)) {
-                navLinks.classList.remove("show");
-            }
-        });
-    }
-
+    // ✅ Update Cart (Added Remove Button)
     function updateCart() {
         cartItems.innerHTML = "";
         let total = 0;
-        cart.forEach(item => {
+
+        cart.forEach((item, index) => {
             total += item.price * item.quantity;
+
             const li = document.createElement("li");
             li.textContent = `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`;
+
+            // ✅ Create Remove Button
+            const removeButton = document.createElement("button");
+            removeButton.textContent = "Remove";
+            removeButton.style.marginLeft = "10px";
+            removeButton.style.background = "#ff4d4d";
+            removeButton.style.color = "white";
+            removeButton.style.border = "none";
+            removeButton.style.padding = "5px 10px";
+            removeButton.style.cursor = "pointer";
+            removeButton.style.borderRadius = "5px";
+
+            // ✅ Remove item when button is clicked
+            removeButton.addEventListener("click", () => {
+                removeFromCart(index);
+            });
+
+            li.appendChild(removeButton);
             cartItems.appendChild(li);
         });
 
-        if (cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+        if (cartTotal) cartTotal.textContent = total.toFixed(2);
         cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
     }
+
+    // ✅ Remove item from cart
+    function removeFromCart(index) {
+        cart.splice(index, 1); // ✅ Remove the item from the cart array
+        updateCart(); // ✅ Refresh the cart display
+    }
 });
+
